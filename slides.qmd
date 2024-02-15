@@ -1,0 +1,106 @@
+---
+format: revealjs
+self-contained: true
+---
+
+## 
+
+<center>
+![<https://doi.org/10.48550/arXiv.2312.12623>](figures/title-authors-abstract.png)
+</center>
+
+## Summary
+
+- Non-blazar AGN PKS 0521-36 observed over 15 years by Fermi-LAT telescope.
+- Lomb-Scargle and wavelet analysis reveals three Quasi-periodic oscillations (QPOs).
+- GP modelling revealed two more QPOs.
+- Cause of QPOs remains unclear.
+- Evidence for QPOs seems inconsistent.
+
+## Data
+
+- ROI is circular region of $10^\circ$ centred at PKS 0521-36
+- 15 years of observations by Fermi-LAT (August 2008 - 2023)
+    - MJD 54683 -- 60187 (5504d)
+- $\gamma$-ray light curve
+- Uniformly sampled
+
+## Method
+
+1. Compute Lomb-Scargle periodogram.
+2. Compute Weighted wavelet Z-transform.
+3. Fit Gaussian Process model with different kernels
+    - Damped Random Walk,
+    - Simple Harmonic Oscillator, and
+4. Choose best combination using BIC.
+4. Look for "significant" peaks in power.
+
+## "Significance" estimation
+
+<center>![](figures/sec3.3a.png){width="60%"}</center>
+<center>![](figures/sec3.3b.png){width="60%"}</center>
+
+
+## Results: LSP and WWZ
+
+T = 268, 295, 806 days.
+
+<center>![](figures/figure02.png){width="100%"}</center>
+
+#
+
+<center>![](figures/figure01.png)</center>
+
+## Results: GP Model
+
+<center>![](figures/figureB1.png){width="70%"}</center>
+
+## Results: GP PSD
+
+<center>![](figures/figureB3.png){width="70%"}</center>
+
+## Statistical Comments
+
+- CARMA is a __stochastic__ process not a Gaussian process model.
+- Computationally heavy, N $\approx$ 500
+    - MCMC: 32 chains with 5,000 burn-in + 10,000 steps.
+- No mention of priors.
+- The more data you have, the more likely you are to reach significance.
+    - The difference between 3$\sigma$ vs. 5$\sigma$ might not itself be significant.
+
+## Note on BIC
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+$$\textrm{BIC} = -2\mathcal{L} + K \log N$$
+
+- BIC should only be used to compare between models that are subsets of eachother.
+- Not surprising that BIC increases with model complexity.
+
+::: 
+
+::: {.column width="55%"}
+
+![](figures/tableB1.png){width="100%"}
+
+:::
+
+::::
+
+## Manuscript queries
+
+- Detected QPOs don't match between LSP/WWZ and GP models
+    - Used different date ranges MJD 54683 -- 60187 (15y) vs. MJD 55358 -- 59547 (11.4y) for each.
+- Kelly et al. (2009) and Li & Wang (2018) are analyses of optical not $\gamma$-ray light curves.
+- Where does the "quasi" come from?
+    - LSP and WWZ detect periodicity
+
+
+## QPO vs BH Mass
+
+<center>![](figures/figureC1.png){width=62%}</center>
+
+
+
