@@ -14,32 +14,48 @@ self-contained: true
 - Non-blazar AGN PKS 0521-36 observed over 15 years by Fermi-LAT telescope.
 - Lomb-Scargle and wavelet analysis reveals three Quasi-periodic oscillations (QPOs).
 - GP modelling revealed two more QPOs.
+- __First__ long-term QPO detected from a non-blazar AGN.
 - Cause of QPOs remains unclear.
 - Evidence for QPOs seems inconsistent.
 
 ## Data
 
-- ROI is circular region of $10^\circ$ centred at PKS 0521-36
+- ROI is circular region of 10$^\circ$ radius centred at PKS 0521-36
 - 15 years of observations by Fermi-LAT (August 2008 - 2023)
-    - MJD 54683 -- 60187 (5504d)
-- $\gamma$-ray light curve
+    - MJD 54683 -- MJD 60187 (5,504 days)
+- $\gamma$-ray light curve (0.1 -- 300 GeV)
 - Uniformly sampled
 
 ## Method
 
 1. Compute Lomb-Scargle periodogram.
 2. Compute Weighted wavelet Z-transform.
-3. Fit Gaussian Process model with different kernels
+3. Fit Gaussian Process model with different kernels:
     - Damped Random Walk,
     - Simple Harmonic Oscillator, and
-4. Choose best combination using BIC.
+    - combinations thereof.
+4. Choose best kernel combination using BIC.
 4. Look for "significant" peaks in power.
 
-## "Significance" estimation
+## "Significance" estimation {.smaller}
 
-<center>![](figures/sec3.3a.png){width="60%"}</center>
-<center>![](figures/sec3.3b.png){width="60%"}</center>
+:::: {.columns}
 
+::: {.column width="60%"}
+
+<center>![](figures/sec3.3a.png){width="100%"}</center>
+<center>![](figures/sec3.3b.png){width="100%"}</center>
+
+:::
+
+::: {.column width="40%"}
+
+- Nice application of bootstrapping to get the distribution of light curves.
+- Not clear how $\beta = 0.48 \pm 0.16$ is determined
+
+:::
+
+::::
 
 ## Results: LSP and WWZ
 
@@ -61,7 +77,8 @@ T = 268, 295, 806 days.
 
 ## Statistical Comments
 
-- CARMA is a __stochastic__ process not a Gaussian process model.
+- CARMA is a __stochastic__ process
+    - CAR(1) is a special case that can be expressed as GP.
 - Computationally heavy, N $\approx$ 500
     - MCMC: 32 chains with 5,000 burn-in + 10,000 steps.
 - No mention of priors.
@@ -89,13 +106,16 @@ $$\textrm{BIC} = -2\mathcal{L} + K \log N$$
 
 ::::
 
-## Manuscript queries
+## Manuscript queries {.smaller}
 
-- Detected QPOs don't match between LSP/WWZ and GP models
+- QPOs don't match between LSP/WWZ and GP models
+    - $T = 268, 295, 806$ days vs. $T = 283, 886$ days.
     - Used different date ranges MJD 54683 -- 60187 (15y) vs. MJD 55358 -- 59547 (11.4y) for each.
 - Kelly et al. (2009) and Li & Wang (2018) are analyses of optical not $\gamma$-ray light curves.
 - Where does the "quasi" come from?
-    - LSP and WWZ detect periodicity
+    - LSP and WWZ target periodicity, not quasi-periodicity.
+    - there are QP GP kernels.
+- Insufficient information to reproduce, e.g., source code.
 
 
 ## QPO vs BH Mass
